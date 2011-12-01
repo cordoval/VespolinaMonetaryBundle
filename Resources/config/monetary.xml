@@ -9,6 +9,7 @@
         <parameter key="vespolina.monetary.service.currency_manager_class">Vespolina\MonetaryBundle\Service\CurrencyManager</parameter>
         <parameter key="vespolina.monetary.service.monetary_manager_class">Vespolina\MonetaryBundle\Service\MonetaryManager</parameter>
         <parameter key="vespolina.monetary.model.monetary_class">Vespolina\MonetaryBundle\Model\Monetary</parameter>
+        <parameter key="%vespolina.monetary.service.monetary_extension.class%">Vespolina\MonetaryBundle\Extension\Twig\CurrencyExtension</parameter>
 
         <parameter key="vespolina.monetary.currency_dir">%kernel.cache_dir%/vespolina/currencies</parameter>
     </parameters>
@@ -22,6 +23,10 @@
             <argument>%vespolina.monetary.model.monetary_class%</argument>
             <argument type="service" id="vespolina.monetary.service.currency_manager" />
             <argument>EUR</argument>
+        </service>
+        <service id="vespolina.monetary.service.monetary_extension" class="%vespolina.monetary.service.monetary_extension.class%">
+            <argument type="service" id="vespolina.monetary.service.currency_manager" />
+            <tag name="twig.extension"/>
         </service>
     </services>
 </container>
