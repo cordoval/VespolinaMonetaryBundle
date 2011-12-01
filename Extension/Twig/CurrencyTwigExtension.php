@@ -9,20 +9,20 @@ class CurrencyTwigExtension extends \Twig_Extension
     public function __construct($monetaryManager)
     {
         $this->monetaryManager = $monetaryManager;
-        parent::__construct();
     }
     // the magic function that makes this easy
     public function getFilters()
     {
         return array(
-            'currency_convert'  => new \Twig_Filter_Function('currency_convert'),
+            'currencyConvert'  => new \Twig_Filter_Method($this, 'currencyConvert'),
         );
     }
 
     // your custom function
-    public function currency_convert($price, $currency)
+    public function currencyConvert($price, $currency)
     {
         //$currencyNumber = $service->convert($price, $currency);
+        $this->monetaryManager->;
         $currencyNumber = "0.00";
         return $currencyNumber;
     }
