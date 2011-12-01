@@ -4,6 +4,13 @@ namespace Vespolina\MonetaryBundle\Extension\Twig;
 
 class CurrencyTwigExtension extends \Twig_Extension
 {
+    protected $monetaryManager;
+
+    public function __construct($monetaryManager)
+    {
+        $this->monetaryManager = $monetaryManager;
+        parent::__construct();
+    }
     // the magic function that makes this easy
     public function getFilters()
     {
