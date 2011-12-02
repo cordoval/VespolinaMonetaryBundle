@@ -25,7 +25,7 @@ class CurrencyTwigExtension extends \Twig_Extension
     public function currencyConvert($monetary, $currency)
     {
         $monetaryConverted = $this->monetaryManager->format($monetary, $currency);
-        return $monetaryConverted->getValue();
+        return $monetaryConverted;
     }
 
     // for a service we need a name

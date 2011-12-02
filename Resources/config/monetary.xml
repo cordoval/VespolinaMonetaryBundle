@@ -22,7 +22,8 @@
         <service id="vespolina.monetary.service.monetary_manager" class="%vespolina.monetary.service.monetary_manager_class%">
             <argument>%vespolina.monetary.model.monetary_class%</argument>
             <argument type="service" id="vespolina.monetary.service.currency_manager" />
-            <argument id="vespolina_monetary.base_currency"></argument>
+            <argument>%vespolina_monetary.base_currency%</argument>
+
         </service>
         <service id="vespolina.monetary.service.monetary_extension" class="%vespolina.monetary.service.monetary_extension.class%">
             <argument type="service" id="vespolina.monetary.service.monetary_manager" />

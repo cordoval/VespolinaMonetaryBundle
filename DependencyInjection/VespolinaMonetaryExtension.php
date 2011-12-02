@@ -32,9 +32,7 @@ class VespolinaMonetaryExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('monetary.xml');
 
-        if (isset($config['vespolina_monetary'])) {
-           $this->configureBaseCurrency($config['vespolina_monetary'], $container);
-        }
+        $this->configureBaseCurrency($config, $container);
     }
 
     protected function configureBaseCurrency(array $config, ContainerBuilder $container)
