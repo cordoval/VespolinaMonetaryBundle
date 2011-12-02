@@ -184,4 +184,28 @@ class MonetaryManager implements MonetaryManagerInterface
         $roundUp = '.'.substr('0000000000000005', -($precision+1));
         return bcadd((string)$amount, $roundUp, $precision);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function format($monetary, $currency = null)
+    {
+        if ($currency !== null) {
+            $currency = $this->currencyManager->createCurrency($currency);
+        } else {
+            $currency = $this->baseCurrency;
+        }
+
+        if (!($monetary instanceof Monetary)) {
+            $monetary = $this->createMonetary($monetary, $currency);
+        }
+
+        if($currency->getName() !== $this->baseCurrency->getName()) {
+            $monetary = $this->exchange($monetary, $currency);
+            $result = $monetary->getCurrency()->formatAmount($monetary->getValue());
+        } else {
+            $result = $this->baseCurrency->formatAmount($monetary->getValue());
+        }
+        return $result;
+    }
 }

@@ -9,10 +9,9 @@ class CurrencyTwigExtension extends \Twig_Extension
 {
     protected $monetaryManager;
 
-    public function __construct($monetaryManager, $baseCurrency)
+    public function __construct($monetaryManager)
     {
         $this->monetaryManager = $monetaryManager;
-        $this->baseCurrency = $baseCurrency;
     }
     // the magic function that makes this easy
     public function getFilters()
@@ -23,11 +22,9 @@ class CurrencyTwigExtension extends \Twig_Extension
     }
 
     // your custom function
-    public function currencyConvert($price, $currency)
+    public function currencyConvert($monetary, $currency)
     {
-        $baseCurrencyInstance = new Currency($this->baseCurrency);
-        $monetary = new Monetary($price, $baseCurrencyInstance);
-        $monetaryConverted = $this->monetaryManager->exchange($monetary, $currency);
+        $monetaryConverted = $this->monetaryManager->format($monetary, $currency);
         return $monetaryConverted->getValue();
     }
 

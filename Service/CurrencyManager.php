@@ -176,7 +176,7 @@ class %sCurrency extends Currency
                 return (array)$currency;
             }
         }
-        throw new Exception(sprintf("The currency code %s is not defined", $currencyCode));
+        throw new \Exception(sprintf("The currency code %s is not defined", $currencyCode));
     }
 
 
