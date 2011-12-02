@@ -9,9 +9,10 @@ class CurrencyTwigExtension extends \Twig_Extension
 {
     protected $monetaryManager;
 
-    public function __construct($monetaryManager)
+    public function __construct($monetaryManager, $baseCurrency)
     {
         $this->monetaryManager = $monetaryManager;
+        $this->baseCurrency = $baseCurrency;
     }
     // the magic function that makes this easy
     public function getFilters()
@@ -24,9 +25,8 @@ class CurrencyTwigExtension extends \Twig_Extension
     // your custom function
     public function currencyConvert($price, $currency)
     {
-        $this->secondCurrency = $this->getCurrency('The codes assigned for transactions where no name is involve', 'XXX', 'X');
-        $baseCurrency = new CurrencySOL();
-        $monetary = new Monetary($price, $baseCurrency);
+        $baseCurrencyInstance = new Currency($this->baseCurrency);
+        $monetary = new Monetary($price, $baseCurrencyInstance);
         $monetaryConverted = $this->monetaryManager->exchange($monetary, $currency);
         return $monetaryConverted->getValue();
     }
