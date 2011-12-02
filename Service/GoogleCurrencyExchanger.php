@@ -24,6 +24,6 @@ class GoogleCurrencyExchanger extends CurrencyExchanger
         $to = $this->extractCode($to);
         $url = sprintf("http://www.google.com/ig/calculator?hl=en&q=1%s%3D%3F%s", $from, $to);
         $conversion = wget($url);
-
+        return $conversion;
     }
 }

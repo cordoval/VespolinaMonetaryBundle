@@ -17,7 +17,8 @@ abstract class CurrencyExchanger implements CurrencyExchangerInterface
 {
     protected function extractCode($currency)
     {
-        if ($currency instanceof Vespolina\MonetaryBundle\Model\CurrencyInterface)
+        $currencyReflection = new \ReflectionClass($currency);
+        if ($currencyReflection->implementsInterface('Vespolina\MonetaryBundle\Model\CurrencyInterface'))
         {
             return $currency->getCurrencyCode();
         }

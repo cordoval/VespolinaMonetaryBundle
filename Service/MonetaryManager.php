@@ -190,6 +190,10 @@ class MonetaryManager implements MonetaryManagerInterface
      */
     public function format($monetary, $currency = null)
     {
+        if ($monetary == null) {
+            throw new \Exception('cannot format null monetary');
+        }
+
         if ($currency !== null) {
             $currency = $this->currencyManager->createCurrency($currency);
         } else {
