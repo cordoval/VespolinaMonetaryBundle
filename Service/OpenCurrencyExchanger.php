@@ -31,7 +31,7 @@ class OpenCurrencyExchanger extends CurrencyExchanger
         $from = $this->extractCode($from);
         $to = $this->extractCode($to);
 
-        if ($cachedExpired || $this->openObject == null) {
+        if ($this->isCachedExpired() || $this->openObject == null) {
             $this->openObject = $this->getExchangeRates();
         }
 
@@ -46,5 +46,14 @@ class OpenCurrencyExchanger extends CurrencyExchanger
         $url = "http://openexchangerates.org/latest.php";
         $openObject = json_decode(file_get_contents($url));
         return $openObject;
+    }
+
+    public function isCacheExpired()
+    {
+        if ($this->openObject->timestamp) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
