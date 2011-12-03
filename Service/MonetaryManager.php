@@ -191,7 +191,7 @@ class MonetaryManager implements MonetaryManagerInterface
     public function format($monetary, $currency = null)
     {
         if ($monetary == null) {
-            throw new \Exception('cannot format null monetary');
+            throw new \InvalidArgumentException('cannot format null monetary');
         }
 
         if ($currency !== null) {
@@ -200,7 +200,7 @@ class MonetaryManager implements MonetaryManagerInterface
             $currency = $this->baseCurrency;
         }
 
-        if (!($monetary instanceof Monetary)) {
+        if (!$monetary instanceof Monetary) {
             $monetary = $this->createMonetary($monetary, $currency);
         }
 

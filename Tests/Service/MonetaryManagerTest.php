@@ -195,6 +195,20 @@ class MonetaryManagerTest extends MonetaryTestBase
         $this->assertEquals(.16, $monetary1->getValue(), 'subtract by different currencies');
     }
 
+    public function testFormatWithNullMonetaryArgumentFiresException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->service->format(null);
+    }
+
+    public function testFormatMonetaryWithBaseCurrencyWithoutCurrencyExchange()
+    {
+        $monetary = new Monetary(8, $this->baseCurrency);
+        $currency = $this->baseCurrency;
+        $monetaryFormatted = $this->service->format($monetary, $currency->getCurrencyCode());
+        assertEquals($monetaryFormatted, 'df');
+    }
+
     protected function setUp()
     {
         $this->baseCurrency = $this->getBaseCurrency();

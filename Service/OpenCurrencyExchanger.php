@@ -17,12 +17,12 @@ use Vespolina\MonetaryBundle\Service\CurrencyExchanger;
 class OpenCurrencyExchanger extends CurrencyExchanger
 {
     protected $openObject = null;
-    protected $timeout
+    protected $timeout;
 
-    public function __construct($timeout)
+    public function __construct()
     {
         $this->openObject = $this->getExchangeRates();
-        $this->timeout = $timeout;
+        $this->timeout = 2500;
     }
 
     /**
