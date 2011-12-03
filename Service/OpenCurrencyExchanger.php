@@ -17,10 +17,12 @@ use Vespolina\MonetaryBundle\Service\CurrencyExchanger;
 class OpenCurrencyExchanger extends CurrencyExchanger
 {
     protected $openObject = null;
+    protected $timeout
 
-    public function __construct()
+    public function __construct($timeout)
     {
         $this->openObject = $this->getExchangeRates();
+        $this->timeout = $timeout;
     }
 
     /**
@@ -50,7 +52,7 @@ class OpenCurrencyExchanger extends CurrencyExchanger
 
     public function isCacheExpired()
     {
-        if ($this->openObject->timestamp) {
+        if ($this->openObject->timestamp + $this->timeout < time()) {
             return false;
         } else {
             return true;
