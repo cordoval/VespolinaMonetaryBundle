@@ -194,17 +194,17 @@ class MonetaryManager implements MonetaryManagerInterface
             throw new \InvalidArgumentException('cannot format null monetary');
         }
 
-        if ($currency !== null) {
+        if (is_string($currency)) {
             $currency = $this->currencyManager->createCurrency($currency);
         } else {
             $currency = $this->baseCurrency;
         }
 
-        if (!$monetary instanceof Monetary) {
+        if (!$monetary instanceof MonetaryInterface) {
             $monetary = $this->createMonetary($monetary, $currency);
         }
 
-        if($currency->getName() !== $this->baseCurrency->getName()) {
+        if($currency) {
             $monetary = $this->exchange($monetary, $currency);
             $result = $monetary->getCurrency()->formatAmount($monetary->getValue());
         } else {

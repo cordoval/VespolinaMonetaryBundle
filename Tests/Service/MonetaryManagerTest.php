@@ -204,9 +204,10 @@ class MonetaryManagerTest extends MonetaryTestBase
     public function testFormatMonetaryWithBaseCurrencyWithoutCurrencyExchange()
     {
         $monetary = new Monetary(8, $this->baseCurrency);
+        //die(var_export($this->baseCurrency));
         $currency = $this->baseCurrency;
-        $monetaryFormatted = $this->service->format($monetary, $currency->getCurrencyCode());
-        assertEquals($monetaryFormatted, 'df');
+        $monetaryFormatted = $this->service->format($monetary, "USD");
+        $this->assertEquals($monetaryFormatted, '');
     }
 
     protected function setUp()
