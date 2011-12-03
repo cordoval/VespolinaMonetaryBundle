@@ -16,6 +16,13 @@ use Vespolina\MonetaryBundle\Service\CurrencyExchanger;
  */
 class OpenCurrencyExchanger extends CurrencyExchanger
 {
+    protected $openObject = null;
+
+    public function __construct()
+    {
+        $this->openObject = $this->getExchangeRates();
+    }
+
     /**
      * @inheritdoc
      */
@@ -23,11 +30,21 @@ class OpenCurrencyExchanger extends CurrencyExchanger
     {
         $from = $this->extractCode($from);
         $to = $this->extractCode($to);
-        $url = "http://openexchangerates.org/latest.php";
-        $openObject = json_decode(file_get_contents($url));
-        $to = $openObject->rates->$to; // EUR
-        $from = $openObject->rates->$from; // PEN
+
+        if ($cachedExpired || $this->openObject == null) {
+            $this->openObject = $this->getExchangeRates();
+        }
+
+        $to = $this->openObject->rates->$to; // EUR
+        $from = $this->openObject->rates->$from; // PEN
         $rate = bcdiv($from, $to, 8); // PEN/USD (26) / EUR/USD (7)
         return $rate;
+    }
+
+    public function getExchangeRates()
+    {
+        $url = "http://openexchangerates.org/latest.php";
+        $openObject = json_decode(file_get_contents($url));
+        return $openObject;
     }
 }
