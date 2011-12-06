@@ -50,7 +50,10 @@ class OpenCurrencyExchanger extends CurrencyExchanger
         return $openObject;
     }
 
-    public function isCacheExpired()
+    /**
+     * @inheritdoc
+     */
+    public function isCachedExpired()
     {
         if ($this->openObject->timestamp + $this->timeout < time()) {
             return false;
