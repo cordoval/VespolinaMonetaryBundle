@@ -14,7 +14,12 @@
         <parameter key="vespolina.monetary.currency_dir">%kernel.cache_dir%/vespolina/currencies</parameter>
     </parameters>
     <services>
-        <service id="vespolina.monetary.service.currency_exchanger" class="%vespolina.monetary.service.currency_exchanger_class%" />
+        <service id="vespolina.monetary.service.exchange_rate_provider" class="%vespolina.monetary.service.exchange_rate_provider_class%" />
+
+        <service id="vespolina.monetary.service.currency_exchanger" class="%vespolina.monetary.service.currency_exchanger_class%">
+            <argument type="service" id="vespolina.monetary.service.exchange_rate_provider" />
+        </service>
+
         <service id="vespolina.monetary.service.currency_manager" class="%vespolina.monetary.service.currency_manager_class%">
             <argument type="service" id="vespolina.monetary.service.currency_exchanger" />
             <argument>%vespolina.monetary.currency_dir%</argument>
