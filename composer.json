@@ -1,0 +1,29 @@
+{
+    "name": "vespolina/monetary-bundle",
+    "type": "symfony-bundle",
+    "description": "Vespolina Monetary bundle. Monetary management and more.",
+    "keywords": ["shop", "ecommerce", "monetary", "item"],
+    "homepage": "http://vespolina-project.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vespolina Team",
+            "homepage": "https://github.com/vespolina/VespolinaMonetaryBundle/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "2.*",
+        "symfony/security-bundle": "2.*"
+    },
+    "suggest": {
+        "symfony/doctrine-bundle": "*",
+        "symfony/mongodb-odm-bundle": "*",
+        "doctrine/couchdb-odm-bundle": "*"
+    },
+    "autoload": {
+        "psr-0": { "Vespolina\\MonetaryBundle": "" }
+    },
+    "target-dir": "Vespolina/MonetaryBundle"
+}
+
