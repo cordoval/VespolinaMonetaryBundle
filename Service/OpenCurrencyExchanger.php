@@ -35,10 +35,10 @@ class OpenCurrencyExchanger extends CurrencyExchanger
 
         if ($this->isCachedExpired() || $this->openObject == null) {
             $this->openObject = $this->getExchangeRates();
-            $this->container->
+            //$this->container->
             $this->openObject; // persist json to db
         } else {
-            $this->openObject = // read json from db
+            $this->openObject = null;// read json from db
         }
 
         $to = $this->openObject->rates->$to; // EUR
